@@ -31,11 +31,20 @@ app.get('/random-beer', (req, res) => {
     const promise = punkAPI.getRandom();
     promise.then(randomBeer => {
         console.log(randomBeer);
-        res.render('random-beer', randomBeer[0]);
+        res.render('beer', randomBeer[0]);
+    })
+    .catch(() => console.log('Not found'));
+});
+
+app.get('/beers/:id', (req, res) => {
+    const promise = punkAPI.getBeer(req.params.id);
+    promise.then(beer => {
+        console.log(beer);
+        res.render('beer', beer[0]);
     })
     .catch(() => console.log('Not found'));
 });
 
 
-app.listen(3001, () => console.log('🏃‍ on port 3000'));
+app.listen(3000, () => console.log('🏃‍ on port 3000'));
 
